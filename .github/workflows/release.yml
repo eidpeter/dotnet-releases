@@ -35,7 +35,7 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name="App-Hello-$tag-${{ matrix.target }}"
           # Build everything
-          dotnet publish dotnet-releases.csproj --framework net5.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained True -p:PublishSingleFile=True -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=True -p:TrimMode=Link
+          dotnet publish dotnet-releases.csproj --framework net5.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" --self-contained True -p:PublishSingleFile=True -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=True -p:TrimMode=Link -p:DebugType=None -p:DebugSymbols=False
           # Pack files
           if [ "${{ matrix.target }}" == "win-x64" ]; then
             # Pack to zip for Windows
