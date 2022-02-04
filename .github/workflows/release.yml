@@ -35,7 +35,7 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name="App-Hello-$tag-${{ matrix.target }}"
           # Build everything
-          dotnet publish dotnet-releases.csproj --framework net5.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+          dotnet publish dotnet-releases.csproj --framework net5.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name" -p:PublishTrimmed=True -p:TrimMode=Link
           # Pack files
           if [ "${{ matrix.target }}" == "win-x64" ]; then
             # Pack to zip for Windows
@@ -49,5 +49,3 @@ jobs:
         uses: softprops/action-gh-release@v0.1.14
         with:
           files: "App*"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
