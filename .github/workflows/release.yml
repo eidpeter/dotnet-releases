@@ -46,7 +46,7 @@ jobs:
           # Delete output directory
           rm -r "$release_name"
       - name: Publish
-        uses: softprops/action-gh-release@vv0.1.14
+        uses: softprops/action-gh-release@v0.1.14
         with:
           files: "App*"
         env:
