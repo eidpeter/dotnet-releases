@@ -49,7 +49,7 @@ jobs:
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
-          curl --upload-file App-Hello-$tag-${{ matrix.target }} https://transfer.sh/ > links.txt
+          curl --upload-file ./App-Hello-$tag-${{ matrix.target }} https://transfer.sh/ > links.txt
       - name: Publish
         uses: softprops/action-gh-release@v0.1.14
         with:
