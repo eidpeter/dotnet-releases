@@ -45,22 +45,7 @@ jobs:
           fi
           # Delete output directory
           rm -r "$release_name"
-      - name: Upload to transfer.sh
-        shell: bash
-        run: |
-          tag=$(git describe --tags --abbrev=0)
-          release_name="App-Hello-$tag-${{ matrix.target }}"
-          if [ "${{ matrix.target }}" == "win-x64" ]; then
-            # Pack to zip for Windows
-            curl --upload-file "${release_name}.zip" https://transfer.sh/ >> links.txt
-          else
-            curl --upload-file "${release_name}.tar.gz" https://transfer.sh/ >> links.txt
-          fi
       - name: Publish
         uses: softprops/action-gh-release@v0.1.14
         with:
-          files: |
-            "App*"
-            links.txt
-          
-          
+          files: "App*"
