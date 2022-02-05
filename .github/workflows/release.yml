@@ -45,7 +45,16 @@ jobs:
           fi
           # Delete output directory
           rm -r "$release_name"
+      - name: Upload to transfer.sh
+        shell: bash
+        run: |
+          tag=$(git describe --tags --abbrev=0)
+          curl --upload-file App-Hello-$tag-${{ matrix.target }} https://transfer.sh/ > links.txt
       - name: Publish
         uses: softprops/action-gh-release@v0.1.14
         with:
-          files: "App*"
+          files: |
+            "App*"
+            links.txt
+          
+          
